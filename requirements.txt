@@ -1,0 +1,4 @@
+fastapi==0.105.0
+numpy==1.26.2
+pybaseball==2.2.7
+uvicorn==0.24.0.post1
