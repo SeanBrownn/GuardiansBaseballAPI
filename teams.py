@@ -3,7 +3,7 @@ import datetime
 import pybaseball
 
 
-class Team:
+class teams:
 
     current_year=datetime.datetime.now().year
 
