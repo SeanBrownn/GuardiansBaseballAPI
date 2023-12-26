@@ -1,6 +1,9 @@
 import datetime
+from typing import Annotated
 
 import pybaseball
+from fastapi import Query
+
 
 class players:
 
@@ -42,3 +45,22 @@ class players:
     @staticmethod
     def get_pitching_stats(start_season: int = current_year, end_season: int = None, league: str = 'all', qual: int = None, ind: int = 1):
         return pybaseball.pitching_stats(start_season, end_season, league, qual, ind).to_json(orient='records')
+
+    @staticmethod
+    def get_pitching_stats_bref(start_season: int = current_year):
+        return pybaseball.pitching_stats_bref(start_season).to_json(orient='records')
+
+    # string formats: 'YYYY-MM-DD'
+    @staticmethod
+    def get_pitching_stats_range(start_dt: str, end_dt: str = None):
+        return pybaseball.pitching_stats_range(start_dt, end_dt).to_json(orient='records')
+
+    # last, first (last and first name) are case-insensitive
+    # fuzzy: if true, searches for inexact name matches, returns 5 closest players
+    @staticmethod
+    def get_player_id_lookup(last: str, first: str = None, fuzzy: bool = False):
+        return pybaseball.playerid_lookup(last, first, fuzzy).to_json(orient='records')
+
+    @staticmethod
+    def get_player_id_reverse_lookup(player_ids: Annotated[list[int], Query()], key_type: str = 'mlbam'):
+        return pybaseball.playerid_reverse_lookup(player_ids, key_type).to_json(orient='records')

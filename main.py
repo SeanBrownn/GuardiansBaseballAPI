@@ -1,8 +1,9 @@
 import datetime
+from typing import Annotated
 
 import pybaseball
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 from prospects import prospects
 from teams import teams
@@ -97,6 +98,22 @@ def read_amateur_draft_by_team(team: str, year: int = current_year, keep_stats: 
 @app.get("/top_prospects", tags=["prospects"])
 def read_top_prospects(team: str = None, player_type: str = None):
     return prospects.top_prospects(team, player_type)
+
+@app.get("/pitching_stats_bref", tags=["players"])
+def read_pitching_stats_bref(start_season: int = current_year):
+    return players.get_pitching_stats_bref(start_season)
+
+@app.get("/pitching_stats_range", tags=["players"])
+def read_pitching_stats_range(start_dt: str, end_dt: str = None):
+    return players.get_pitching_stats_range(start_dt, end_dt)
+
+@app.get("/player_id_lookup", tags=["players"])
+def read_player_id_lookup(last: str, first: str = None, fuzzy: bool = False):
+    return players.get_player_id_lookup(last, first, fuzzy)
+
+@app.get("/player_id_reverse_lookup", tags=["players"])
+def read_player_id_reverse_lookup(player_ids: Annotated[list[int], Query()], key_type: str = 'mlbam'):
+    return players.get_player_id_reverse_lookup(player_ids, key_type)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
