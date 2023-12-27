@@ -1,4 +1,10 @@
-# PythonSampleAPI
+# GuardiansBaseballAPI
+
+The functions are split up into 3 classes: teams, mlb, and players. The functions are organized by the scope of data
+we are searching, not by what is returned. For example, functions in the "teams" class all require that we specify a
+team. Similarly, functions in the "players" class all require that we specify a player in some way. The rest of the
+functions, which search across all of MLB for data, are in the "mlb" class.
+
 ## To Install Dependencies:
 From Project Root Directory, Run Command:
 ```
