@@ -3,7 +3,6 @@ from typing import Union
 
 import pybaseball
 
-
 class mlb:
 
     current_year = datetime.datetime.now().year
@@ -43,3 +42,44 @@ class mlb:
     @staticmethod
     def get_statcast_catcher_framing(year: int, min_called_p: Union[int, str] = "q"):
         return pybaseball.statcast_catcher_framing(year, min_called_p).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_batter_exitvelo_barrels(year: int, minBBE: int = None):
+        return pybaseball.statcast_batter_exitvelo_barrels(year, minBBE).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_batter_expected_stats(year: int, minPA: int = None):
+        return pybaseball.statcast_batter_expected_stats(year, minPA).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_batter_percentile_ranks(year: int):
+        return pybaseball.statcast_batter_percentile_ranks(year).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_batter_pitch_arsenal(year: int, minPA: int = 25):
+        return pybaseball.statcast_batter_pitch_arsenal(year, minPA).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_exitvelo_barrels(year: int, minBBE: int = None):
+        return pybaseball.statcast_pitcher_exitvelo_barrels(year, minBBE).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_expected_stats(year: int, minPA: int = None):
+        return pybaseball.statcast_pitcher_expected_stats(year, minPA).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_pitch_arsenal(year: int, minP: int = None, arsenal_type: str = "avg_speed"):
+        return pybaseball.statcast_pitcher_pitch_arsenal(year, minP, arsenal_type).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_arsenal_stats(year: int, minPA: int = 25):
+        return pybaseball.statcast_pitcher_arsenal_stats(year, minPA).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_percentile_ranks(year: int):
+        return pybaseball.statcast_pitcher_percentile_ranks(year).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher_spin_direction_comparison(year: int, pitch_a: str = "4-Seamer", pitch_b: str = "Changeup",
+                                                       minP: int = 100, pitcher_pov: bool = None):
+        return pybaseball.statcast_pitcher_spin_dir_comp(year, pitch_a, pitch_b, minP, pitcher_pov).to_json(orient='records')

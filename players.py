@@ -77,3 +77,7 @@ class players:
     @staticmethod
     def get_statcast_batter(player_id: int, start_dt: str = None, end_dt: str = None):
         return pybaseball.statcast_batter(start_dt, end_dt, player_id).to_json(orient='records')
+
+    @staticmethod
+    def get_statcast_pitcher(start_dt: str, end_dt: str, player_id: int):
+        return pybaseball.statcast_pitcher(start_dt, end_dt, player_id).to_json(orient='records')

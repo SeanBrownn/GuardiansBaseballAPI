@@ -160,5 +160,50 @@ def read_statcast_catcher_poptime(year: int, min_2b_att: int = 5, min_3b_att: in
 def read_statcast_catcher_framing(year: int, min_called_p: Union[int, str] = "q"):
     return mlb.get_statcast_catcher_framing(year, min_called_p)
 
+@app.get("/statcast_batter_exitvelo_barrels", tags=["mlb"])
+def read_statcast_batter_exitvelo_barrels(year: int, minBBE: int = None):
+    return mlb.get_statcast_batter_exitvelo_barrels(year, minBBE)
+
+@app.get("/statcast_batter_expected_stats", tags=["mlb"])
+def read_statcast_batter_expected_stats(year: int, minPA: int = None):
+    return mlb.get_statcast_batter_expected_stats(year, minPA)
+
+@app.get("/statcast_batter_percentile_ranks", tags=["mlb"])
+def read_statcast_batter_percentile_ranks(year: int):
+    return mlb.get_statcast_batter_percentile_ranks(year)
+
+@app.get("/statcast_batter_pitch_arsenal", tags=["mlb"])
+def read_statcast_batter_pitch_arsenal(year: int, minPA: int = 25):
+    return mlb.get_statcast_batter_pitch_arsenal(year, minPA)
+
+@app.get("/statcast_pitcher", tags=["players"])
+def read_statcast_pitcher(start_dt: str, end_dt: str, player_id: int):
+    return players.get_statcast_pitcher(start_dt, end_dt, player_id)
+
+@app.get("/statcast_pitcher_exitvelo_barrels", tags=["mlb"])
+def read_statcast_pitcher_exitvelo_barrels(year: int, minBBE: int = None):
+    return mlb.get_statcast_pitcher_exitvelo_barrels(year, minBBE)
+
+@app.get("/statcast_pitcher_expected_stats", tags=["mlb"])
+def read_statcast_pitcher_expected_stats(year: int, minPA: int = None):
+    return mlb.get_statcast_pitcher_expected_stats(year, minPA)
+
+@app.get("/statcast_pitcher_pitch_arsenal", tags=["mlb"])
+def read_statcast_pitcher_pitch_arsenal(year: int, minP: int = None, arsenal_type: str = "avg_speed"):
+    return mlb.get_statcast_pitcher_pitch_arsenal(year, minP, arsenal_type)
+
+@app.get("/statcast_pitcher_arsenal_stats", tags=["mlb"])
+def read_statcast_pitcher_arsenal_stats(year: int, minPA: int = 25):
+    return mlb.get_statcast_pitcher_arsenal_stats(year, minPA)
+
+@app.get("/statcast_pitcher_percentile_ranks", tags=["mlb"])
+def read_statcast_pitcher_percentile_ranks(year: int):
+    return mlb.get_statcast_pitcher_percentile_ranks(year)
+
+@app.get("/statcast_pitcher_spin_direction_comparison", tags=["mlb"])
+def read_statcast_pitcher_spin_direction_comparison(year: int, pitch_a: str = "4-Seamer", pitch_b: str = "Changeup",
+                                                   minP: int = 100, pitcher_pov: bool = None):
+    return mlb.get_statcast_pitcher_spin_direction_comparison(year, pitch_a, pitch_b, minP, pitcher_pov)
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
