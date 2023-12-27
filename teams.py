@@ -45,3 +45,7 @@ class teams:
     @staticmethod
     def get_team_ids(season: int = None, league: str = None):
         return pybaseball.team_ids(season, league).to_json(orient='records')
+
+    @staticmethod
+    def get_schedule_and_record(season: int, team: str):
+        return pybaseball.schedule_and_record(season, team).to_json(orient='records')
